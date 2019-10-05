@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment</title>
+	<style>
+		ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  overflow: hidden;
+		  background-color: #333;
+		}
+		li {
+		  margin: 0;
+		  padding: 0;
+		  float: left;
+		}
+		body{
+		  margin: 0;
+		  padding: 0;
+		}
+		li a {
+		  display: block;
+		  color: white;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		}
+		li a:hover {
+		  background-color: #111;
+		}
+		select{
+			margin: 10% 2% 0 2%;
+		
+		}
+		select {
+			  width: 96%;
+			  padding: 16px 20px;
+			  border: none;
+			  border-radius: 4px;
+			  background-color: #f1f1f1;
+		}
+		input{
+			margin-top:2%;
+			width: 22%;
+		}
+		button{
+			margin-top: 2%;
+			color: white;
+            border-radius: 4px;
+            font-size: 1.5em;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+            background: rgb(28, 184, 65);
+		}
+		#res{
+			margin-top: 5%;
+			font-size: 1.2em;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+
+  		<li><a>Javascript </a></li>
+ 
+	</ul>
+	<div>
+		<select name="" id="dd" onchange="myFunction()">
+	  		<option value="1">Reverse Number</option>
+	  		<option value="2">Pangram or not</option>
+	  		<option value="3">Generate all combinations of a string</option>
+	 		<option value="4">Generate String with letters Arranged in alphabetical order</option>
+	 		<option value="5">Convert the first letter of each word of the string in upper case</option>
+	 		<option value="6">Find the longest word within the string</option>
+	 		<option value="7">Counts the number of vowels within the string</option>
+	 		<option value="8">Check the number is prime or not</option>
+	 		<option value="9">Exponential</option>
+	 		<option value="10">Get the number of occurrences of each letter in specified string</option>
+	 		<option value="11">Binary search on an array</option>
+	 		<option value="12">Count the number of occurrences of the specified letter within the string</option>
+	 		<option value="13">Function to find the first not repeated character</option>
+	 		<option value="14">Find longest substring in a given a string without repeating characters.</option>
+	 		<option value="15">Return function name.</option>
+		</select>
+	</div>
+
+	<center><input  name="v" type="number" id="inp" autocomplete="off"></center><center><input type="number" id="t" name="" style="visibility: hidden" autocomplete="off"></center>
+	<center><button id="submit">Submit</button></center>
+	<b><center><div id="res"></div></center></b>
+
+<script type="text/javascript">
+		function myFunction() {
+			document.getElementById("t").value=null;
+			document.getElementById("res").innerHTML=null;
+			if(document.getElementById("dd").value==15){
+				document.getElementById("inp").style.visibility = "hidden";
+			}
+			else
+				document.getElementById("inp").style.visibility = "visible";
+  			if(document.getElementById("dd").value==1||document.getElementById("dd").value==8||document.getElementById("dd").value==9){
+  				document.getElementById("inp").type = "number";
+  				document.getElementById("inp").value = null;
+  			}
+  			else {
+  				document.getElementById("inp").type = "text";
+  				document.getElementById("inp").value = null;
+  			}
+  			if(document.getElementById("dd").value==9||document.getElementById("dd").value==12||document.getElementById("dd").value==11){
+  				document.getElementById("t").style.visibility = "visible";
+  			}
+  			else
+  				document.getElementById("t").style.visibility = "hidden";
+  			if(document.getElementById("dd").value==12){
+  				document.getElementById("t").maxLength=1;
+  				document.getElementById("t").type = "text";
+  			}
+  			if(document.getElementById("dd").value==9){
+  				document.getElementById("inp").placeholder="Enter the bases"
+  				document.getElementById("t").placeholder="Enter the Exponent"
+  			}
+  			else if(document.getElementById("dd").value==11){
+  				document.getElementById("inp").placeholder="Enter the array separated by a space after each number"
+  				document.getElementById("t").placeholder="Enter the number to be searched"
+  			}
+  			else if(document.getElementById("dd").value==12){
+  				document.getElementById("inp").placeholder="Enter the string"
+  				document.getElementById("t").placeholder="Enter the letter"
+  			}
+  			else{
+  				document.getElementById("inp").placeholder="";
+  				document.getElementById("t").placeholder="";
+  			}
+		}
+	document.getElementById("submit").onclick=function(){
+		var e=document.getElementById("dd");
+		var s = e.options[e.selectedIndex].value;
+		if(s == "1"){
+					var x=document.getElementById("inp").value;
+					var res=0;
+					while(x>0){
+						res=res*10;
+						var t=x%10;
+						res+=t;
+						x=parseInt(x/10);
+						
+					}
+					
+					document.getElementById("res").innerHTML="Reverse of the number is "+res;
+					 document.getElementById("inp").type = "text";
+			
+		}
+		if(s == "2"){
+					var x=document.getElementById("inp").value;
+					var res="";
+					for(var i=x.length;i>=0;i--){
+						res+=x.charAt(i);
+					}
+					if(res.localeCompare(x)==0)
+						document.getElementById("res").innerHTML="It is a Pangram";
+					else
+						document.getElementById("res").innerHTML="It is not a Pangram";
+				
+		}
+		if(s=="3"){
+				var x=document.getElementById("inp").value;
+				var res="";
+				for (var c = 0; c < x.length; c++){
+         			for(var i = 1; i <= x.length - c; i++){
+            			res+=x.substring(c,c+i)+",";
+         			}
+      			}
+      			document.getElementById("res").innerHTML=res;
+		}
+		if(s=="4"){
+			 	var x=document.getElementById("inp").value;
+			 	var res="";
+			 	var temp=[];
+			 	for(var i=0;i<x.length;i++){
+			 		temp.push(x.charAt(i));
+			 	}
+			 	temp.sort();
+			 	for(var i=0;i<x.length;i++){
+			 		res+=temp[i];
+			 	}
+			 	document.getElementById("res").innerHTML=res;
+		}
+		if(s=="5"){
+				var x=document.getElementById("inp").value;
+				var res="";
+				res+=x.charAt(0).toUpperCase();
+				for(var i=1;i<x.length;i++){
+					if(x.charAt(i-1)==' ')
+						res+=x.charAt(i).toUpperCase();
+					else
+						res+=x.charAt(i);
+				}
+				document.getElementById("res").innerHTML=res;
+		}
+		if(s=="6"){
+			var x=document.getElementById("inp").value;
+			var res="";
+			var temp=x.split(" ");
+			var res =temp.sort(function (a, b) { return b.length - a.length; })[0];
+			//res+=temp[temp.length-1];
+			document.getElementById("res").innerHTML=res;
+		}
+		if(s=="7"){
+			var x=document.getElementById("inp").value;
+			var res=0;
+			for(var i=0;i<x.length;i++){
+				if(x.charAt(i).toLowerCase()=='a'||x.charAt(i).toLowerCase()=='e'||x.charAt(i).toLowerCase()=='i'||x.charAt(i).toLowerCase()=='o'||x.charAt(i).toLowerCase()=='u')
+					res++;
+			}
+			document.getElementById("res").innerHTML="Number of vowels in the string is "+res;
+		}
+		if(s=="8"){
+			var x=document.getElementById("inp").value;
+			var res=true;
+			for(var i=2;i<=x/2;i++){
+				if(x%i==0){
+					res=false;
+					break;
+				}
+			}
+			if(x<=1)
+				document.getElementById("res").innerHTML="It is neither a Prime number nor composite";
+			else if(res)
+				document.getElementById("res").innerHTML="It is a Prime number";
+			else
+				document.getElementById("res").innerHTML="It is not a Prime number";
+		}
+		if(s=="9"){
+			var x=document.getElementById("inp").value;
+			var n=document.getElementById("t").value;
+			var res=Math.pow(x,n);
+			document.getElementById("res").innerHTML=res;
+		}
+		if(s=="10"){
+			var x=document.getElementById("inp").value;
+			var res="";
+			var alpa=[];
+			var count=[];
+			for(var i=0;i<x.length;i++){
+				if(x.charAt(i)==' ')
+					continue;
+				if(alpa.indexOf(x.charAt(i).toLowerCase())==-1){
+					alpa.push(x.charAt(i).toLowerCase());
+					count.push(1);
+				}
+				else{
+					var temp=alpa.indexOf(x.charAt(i).toLowerCase() );
+					count[temp]++;
+				}
+			}
+			for(var i=0;i<alpa.length;i++){
+				res+=alpa[i].toLowerCase()+" has occured "+count[i]+" times.\n"
+			}
+			document.getElementById("res").innerHTML=res;
+		}
+		if(s=="11"){
+				var t=document.getElementById("inp").value;
+				var f=document.getElementById("t").value;
+				var x=t.split(" ");
+				var res=false;
+				//Sorted array is required to binary search
+				x.sort();
+				var i=0;
+				var j=x.length-1;
+				var middle=0;
+				while(j>=i){
+					middle=Math.floor((j+i)/2);
+					if(f==x[middle]){
+						res=true;
+						break;
+					}
+					if(f>x[middle]){
+						i=middle+1;
+					}
+					else {
+						j=middle-1;
+					}
+				}
+				if(res)
+					document.getElementById("res").innerHTML="Found";
+				else 
+					document.getElementById("res").innerHTML="Not found";
+		}
+		if(s=="12"){
+			var x=document.getElementById("inp").value;
+			var n=document.getElementById("t").value;
+			var res=0;
+			for(var i=0;i<x.length;i++){
+				if(n==x.charAt(i))
+					res++;
+			}
+			document.getElementById("res").innerHTML=res;
+		}
+		if(s=="13"){
+			var x=document.getElementById("inp").value;
+			var res="";
+			var temp="";
+			var alpa=[];
+			var count=[];
+			for(var i=0;i<x.length;i++){
+				if(x.charAt(i)==' ')
+					continue;
+				if(alpa.indexOf(x.charAt(i).toLowerCase())==-1){
+					alpa.push(x.charAt(i).toLowerCase());
+					count.push(1);
+				}
+				else{
+					var temp=alpa.indexOf(x.charAt(i).toLowerCase() );
+					count[temp]++;
+				}
+			}
+			temp=count.indexOf(1);
+			res=alpa[temp];
+			document.getElementById("res").innerHTML=res;
+		}
+		if(s=="14"){
+			var x=document.getElementById("inp").value;
+			var res="";
+			var temp="";
+			var alpa=[];
+			var count=[];
+			for(var i=0;i<x.length;i++){
+				if(x.charAt(i)==' ')
+					continue;
+				if(alpa.indexOf(x.charAt(i).toLowerCase())==-1){
+					alpa.push(x.charAt(i).toLowerCase());
+					count.push(1);
+				}
+				else{
+					var temp=alpa.indexOf(x.charAt(i).toLowerCase() );
+					count[temp]++;
+				}
+			}
+			for(var i=0;i<count.length;i++){
+				if(count[i]==1){
+					res+=alpa[i];
+				}
+			}
+			if(res=="")
+				document.getElementById("res").innerHTML="No such string exist";
+			else
+				document.getElementById("res").innerHTML=res;
+		}
+		if(s=="15"){
+			var res=FunctionA();
+			document.getElementById("res").innerHTML="Name of the function is "+res;
+		}
+	}
+	function FunctionA(){
+  				var fName = arguments.callee.toString().match(/function ([^\(]+)/)[1];
+  				return fName;
+	}
+	
+</script>
+</body>
+</html>
